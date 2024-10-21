@@ -206,19 +206,35 @@ class UserController
     }
 }
     public function guardarCambiosPerfil() {
-        // Validar los datos del formulario
-        $nombre = $_POST['nombre'];
-        $email = $_POST['email'];
-        // Otros campos...
-    
-        // Guardar los cambios en la base de datos (puedes usar un modelo para esto)
-        $userModel = new UserModel();
-        $userModel->actualizarPerfil($nombre, $email);
-    
-        // Redirigir al inicio de sesión después de guardar los cambios
-        header("Location: /MoneyMinder/index.php/inicioSesion");
+    // Validar los datos del formulario
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $correo_electronico = $_POST['correo_electronico'];
+    $fecha_nacimiento = $_POST['fecha_nacimiento'];
+
+    // Verificar si el usuario está autenticado
+    if (isset($_SESSION['usuario_id'])) {
+        $userId = $_SESSION['usuario_id'];
+
+        // Obtener la conexión a la base de datos
+        $db = $this->model->getDB(); // Asumiendo que el controlador tiene acceso a la conexión de la base de datos
+
+        // Crear una instancia de UsersModel con la conexión
+        $userModel = new UsersModel($db); // Pasamos la conexión a la base de datos
+
+        // Guardar los cambios en la base de datos utilizando el modelo
+        if ($userModel->updateUser($userId, $nombre, $apellido, $correo_electronico, $fecha_nacimiento)) {
+            $_SESSION['nombre_usuario'] = $nombre; // Actualizar el nombre en la sesión
+            header("Location: /MoneyMinder/index.php/inicioSesion");
+            exit();
+        } else {
+            echo "Error al guardar los cambios en el perfil.";
+        }
+    } else {
+        header('Location: /MoneyMinder/index.php');
         exit();
     }
+}
     
     
     public function actualizarPerfil() {
@@ -261,14 +277,14 @@ class UserController
                 echo '<script type="text/javascript">
                         alert("USUARIO CREADO CORRECTAMENTE EN EL SISTEMA");
                         window.location.href="/MoneyMinder/index.php/crearCuenta";
-                      </script>';
+                    </script>';
                 header("Location: /MoneyMinder/index.php/inicioSesion");
                 exit();
             } else {
                 echo '<script type="text/javascript">
                         alert("Error al crear la cuenta. Inténtalo de nuevo.");
                         window.location.href="/MoneyMinder/index.php/crearCuenta";
-                      </script>';
+                    </script>';
                 exit();
             }
         }
@@ -511,27 +527,25 @@ class UserController
     // Método para actualizar una meta de ahorro
     public function actualizarMetaAhorro() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Obtén los datos del formulario
             $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-            $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRING);
+            $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS); // Reemplaza FILTER_SANITIZE_STRING
             $monto_ahorrar = filter_input(INPUT_POST, 'monto_ahorrar', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
             $monto_actual = filter_input(INPUT_POST, 'monto_actual', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-            $fecha_inicio = filter_input(INPUT_POST, 'fecha_inicio', FILTER_SANITIZE_STRING);
-            $fecha_fin = filter_input(INPUT_POST, 'fecha_fin', FILTER_SANITIZE_STRING);
+            $fecha_inicio = filter_input(INPUT_POST, 'fecha_inicio', FILTER_SANITIZE_SPECIAL_CHARS); // Reemplaza FILTER_SANITIZE_STRING
+            $fecha_fin = filter_input(INPUT_POST, 'fecha_fin', FILTER_SANITIZE_SPECIAL_CHARS); // Reemplaza FILTER_SANITIZE_STRING
     
-            // Llama al modelo para actualizar la meta de ahorro
             $metasAhorroModel = new MetasAhorroModel($this->model->getDB());
             $resultado = $metasAhorroModel->updateMetaAhorro($id, $nombre, $monto_ahorrar, $monto_actual, $fecha_inicio, $fecha_fin);
     
             if ($resultado) {
-                // Redirige a metasDeAhorro.php si la actualización fue exitosa
                 header('Location: /MoneyMinder/index.php/metasDeAhorro');
-                exit; // Asegúrate de usar exit después de redirigir
+                exit();
             } else {
                 echo "Error al actualizar la meta de ahorro.";
             }
         }
     }
+    
     
     public function mostrartipsAhorro() {
         require VIEWS_PATH . '/tipsAhorro.php';
