@@ -286,10 +286,17 @@ class UserController
         }
     }
     
+
     public function recuperarClave() {
         require VIEWS_PATH . '/restablecerContrasena.php';
     }
-
+    public function anuncioRestablecerContrasena() {
+        require VIEWS_PATH . '/anuncioRestablecerContrasena.php';
+    }
+    public function mostraranuncioRestablecerContrasena() {
+        require VIEWS_PATH . '/anuncioRestablecerContrasena';
+    }
+ 
     // Crear un nuevo usuario
     public function createUser() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -628,7 +635,7 @@ class UserController
                 $this->redirectToLogin();
                 return;
             }
-
+    
             // Accede al nuevo nombre del campo
             $nuevaContrasena = password_hash($_POST['new-password'], PASSWORD_DEFAULT);
 

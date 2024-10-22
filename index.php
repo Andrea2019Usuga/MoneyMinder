@@ -26,6 +26,9 @@ switch ($uri) {
     case '/MoneyMinder/index.php/crearUsuario':
         $controller->createUser();
         break;
+    case '/MoneyMinder/index.php/anuncioRestablecerContrasena':
+            $controller->anuncioRestablecerContrasena();
+            break;   
     case '/MoneyMinder/index.php/recuperarClave':
         $controller->recuperarClave();
         break;
