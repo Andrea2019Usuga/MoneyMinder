@@ -23,8 +23,9 @@
                  <label for="email"><br>Correo electrónico</label>
                  <input type="email" id="email" name="email" required>
                  <div class="button-container">
-                 <button type="submit">Enviar Contraseña</button>
+                    <a href="/MoneyMinder/index.php/anuncioRestablecerContrasena" class="button-link">Enviar contraseña</a>
                  </div>
+
              </form>
 
 

@@ -98,11 +98,22 @@ form input {
     border-radius: 5px;
 }
 
-.button-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+.button-container a {
+    display: inline-block; /* Para que el enlace se comporte como un botón */
+    width: 50%;  /* Mantiene el ancho como en el botón original */
+    padding: 10px;
+    background-color: #B4A7D6;
+    color: #000000;
+    text-decoration: none; /* Quita el subrayado del enlace */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center; /* Asegura que el texto esté centrado */
 }
+
 
 form button {
     width: 50%;  /* Adjust width as needed */
@@ -117,8 +128,28 @@ form button {
     font-weight: bold;
 }
 
-form button:hover {
+.button-container a:hover {
     background-color: #c58ae7;
+    color: #ffffff; /* Si deseas que el texto cambie de color al hacer hover */
+}
+.button-link {
+    width: 50%; /* Ajusta el ancho como necesites */
+    padding: 10px;
+    background-color: #B4A7D6;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center; /* Centra el texto */
+    text-decoration: none; /* Quita el subrayado del enlace */
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block; /* Permite aplicar ancho y alto */
+    margin-top: 10px; /* Espaciado superior */
+}
+
+.button-link:hover {
+    background-color: #c58ae7; /* Color de fondo al pasar el ratón */
 }
 
 .remember-forgot {
