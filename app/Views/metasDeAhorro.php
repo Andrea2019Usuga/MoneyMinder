@@ -38,7 +38,7 @@ if (isset($_SESSION['usuario_id'])) {
         <a href="/MoneyMinder/index.php/gastos" class="menu-item">Gastos</a>
         <a href="/MoneyMinder/index.php/metasDeAhorro" class="menu-item selected">Metas de Ahorro</a>
         <a href="/MoneyMinder/index.php/tipsAhorro" class="menu-item">Tips de Ahorro</a>
-        <a href="/MoneyMinder/index.php/configuracion" class="menu-item">Configuración</a>
+        <a href="/MoneyMinder/index.php/configuracionCambiarContrasena" class="menu-item">Configuración</a>
     </aside>
 
     <section class="content">

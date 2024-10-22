@@ -129,6 +129,7 @@ main {
     border-radius: 5px; /* Bordes redondeados */
     width: 300px; /* Ancho del campo de búsqueda */
     transition: border-color 0.3s; /* Transición suave al enfocar */
+    margin-right: 550px; /* Espacio entre la barra de búsqueda y el botón */
 }
 
 .search-input:focus {

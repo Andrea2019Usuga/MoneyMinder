@@ -99,8 +99,8 @@ form input {
 }
 
 .button-container a {
-    display: inline-block; /* Para que el enlace se comporte como un botón */
-    width: 50%;  /* Mantiene el ancho como en el botón original */
+    display: block; /* Para que el enlace se comporte como un botón */
+    width: 100%;  /* Mantiene el ancho como en el botón original */
     padding: 10px;
     background-color: #B4A7D6;
     color: #000000;
@@ -130,7 +130,6 @@ form button {
 
 .button-container a:hover {
     background-color: #c58ae7;
-    color: #ffffff; /* Si deseas que el texto cambie de color al hacer hover */
 }
 .button-link {
     width: 50%; /* Ajusta el ancho como necesites */

@@ -14,7 +14,7 @@
         
             <div class="description-container">
                 <p class="description">
-                    Para restablecer tu contraseña, ingresa tu <br>correo electrónico a continuación y <br> envíalo. Se enviará a tu correo electrónico <br> un código único de restablecimiento.
+                    Para recordar tu contraseña, ingresa tu <br>correo electrónico a continuación. <br> Recibirás un correo con la contraseña.
                 </p>
                 
                 <form id="reset-form" action="/MoneyMinder/index.php/requestReset" method="post">
