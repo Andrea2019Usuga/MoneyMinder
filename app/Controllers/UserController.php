@@ -256,8 +256,36 @@ class UserController
         }
     }
     
-    
+    // Metodo que envia correo para recordar contraseña
+    public function recordarClave() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $correo = $_POST["email"];
+            $resultado = $this->model->sendPassword($correo);
+            if ($resultado) {
+                $para      = "$correo";
+                $titulo    = "SU CONTRASEÑA PARA ACCEDER AL SISTEMA ES";
+                $mensaje   = "Estimado usuario, su contrasena para acceder al sistema es ".$resultado['contrasena'];
+                $cabeceras = "From: appmoneyminder@gmail.com";
 
+                if (mail($para, $titulo, $mensaje, $cabeceras))
+                {
+                    header("Location: /MoneyMinder/index.php/inicioSesion");
+                exit();
+                }
+                else
+                {
+                    echo "fallo el envio de correo";
+                }
+            } else {
+                echo '<script type="text/javascript">
+                        alert("El correo ingresado no existe en la base de datos");
+                        window.location.href="/MoneyMinder/index.php/crearCuenta";
+                      </script>';
+                exit();
+            }
+        }
+    }
+    
     public function recuperarClave() {
         require VIEWS_PATH . '/restablecerContrasena.php';
     }
